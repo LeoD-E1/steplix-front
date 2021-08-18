@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-function App() {
+//importing querys
+import { queryGetRates } from "./querys/getRates";
+import { queryGetCurrencies } from "./querys/getCurrencies";
+
+// importing Components
+import Currencies from "./components/Currencies";
+import Rates from "./components/Rates";
+import DetailRate from "./components/DetailRate";
+import NavigationBar from "./components/NavigationBar";
+import HomeScreen from "./screens/HomeScreen";
+import Chart from "./components/reciclable/Chart";
+
+import { getCurrencies } from "./store/currencySlice";
+import { getRates } from "./store/rateSlice";
+
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  const fetchCurrencies = async () => {
+    try {
+      const data = await queryGetCurrencies();
+      data && dispatch(getCurrencies(data.currencies));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchRates = async () => {
+    const data = await queryGetRates();
+    data && dispatch(getRates(data.rates));
+  };
+  useEffect(() => {
+    fetchCurrencies();
+    fetchRates();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <div className="App">
+          <NavigationBar />
+          <Switch>
+            <Route path="/" component={HomeScreen} exact />
+            <Route path="/currencies" component={Currencies} exact />
+            <Route path="/rates" component={Rates} exact />
+            <Route path="/rates/:symbol" component={DetailRate} exact />
+            <Route path="/chart" component={Chart} exact />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </>
   );
-}
+};
 
 export default App;
