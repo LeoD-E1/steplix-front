@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalBody } from "reactstrap";
 import FormRates from "./FormRates";
-import "./styles/rates.css";
+import "./styles/styles.css";
 
 const ModalAddRate = () => {
   const [modal, setModal] = useState(false);

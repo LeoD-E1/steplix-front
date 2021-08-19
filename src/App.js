@@ -31,9 +31,14 @@ const App = () => {
   };
 
   const fetchRates = async () => {
-    const data = await queryGetRates();
-    data && dispatch(setRates(data.rates));
+    try {
+      const data = await queryGetRates();
+      data && dispatch(setRates(data.rates));
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   useEffect(() => {
     fetchCurrencies();
     fetchRates();

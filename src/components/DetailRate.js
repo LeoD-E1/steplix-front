@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { Link } from "react-router-dom";
 import {
   Card,
   CardText,
@@ -53,7 +53,9 @@ const DetailRate = () => {
                       </CardSubtitle>
                     </Col>
                   </Row>
-                  <Button color="primary">View</Button>
+                  <Link to={`/rates/${item.symbol}/chart`}>
+                    <Button color="primary">View chart</Button>
+                  </Link>
                 </CardBody>
               </Card>
             ))

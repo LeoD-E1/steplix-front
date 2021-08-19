@@ -11,7 +11,7 @@ import {
   Col,
 } from "reactstrap";
 import { useSelector } from "react-redux";
-import "./styles/rates.css";
+import "./styles/styles.css";
 import ModalAddRate from "./ModalAddRate";
 import { Link } from "react-router-dom";
 

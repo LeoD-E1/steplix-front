@@ -1,9 +1,13 @@
 import clientAxios from "../helpers/axios";
 
 export const queryGetCurrencies = async () => {
-  const { data } = await clientAxios({
-    method: "GET",
-    url: "/currencies",
-  });
-  return data;
+  try {
+    const { data } = await clientAxios({
+      method: "GET",
+      url: "/currencies",
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
