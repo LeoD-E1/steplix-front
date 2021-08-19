@@ -1,9 +1,10 @@
 // importing external
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { useHistory } from "react-router-dom";
+import { setRates } from "../store/rateSlice";
 
 // Importing Styles
 import "./styles/formRates.css";
@@ -14,6 +15,7 @@ import { queryGetRates } from "../querys/getRates";
 
 const FormRates = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const currencies = useSelector((state) => state.currency);
 
   const {
@@ -22,10 +24,12 @@ const FormRates = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    postRate(data);
-    queryGetRates();
-    history.push("/rates");
+  const onSubmit = (data, e) => {
+    console.log(data);
+    postRate(data).then(() => {
+      queryGetRates().then(({ rates }) => dispatch(setRates(rates)));
+    });
+    e.target.reset();
   };
 
   return (

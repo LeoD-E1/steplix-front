@@ -14,7 +14,7 @@ import HomeScreen from "./screens/HomeScreen";
 import Chart from "./components/reciclable/Chart";
 
 import { getCurrencies } from "./store/currencySlice";
-import { getRates } from "./store/rateSlice";
+import { setRates } from "./store/rateSlice";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -32,7 +32,7 @@ const App = () => {
 
   const fetchRates = async () => {
     const data = await queryGetRates();
-    data && dispatch(getRates(data.rates));
+    data && dispatch(setRates(data.rates));
   };
   useEffect(() => {
     fetchCurrencies();
@@ -50,7 +50,7 @@ const App = () => {
             <Route path="/currencies" component={Currencies} exact />
             <Route path="/rates" component={Rates} exact />
             <Route path="/rates/:symbol" component={DetailRate} exact />
-            <Route path="/chart" component={Chart} exact />
+            <Route path="/rates/:symbol/chart" component={Chart} exact />
           </Switch>
         </div>
       </BrowserRouter>

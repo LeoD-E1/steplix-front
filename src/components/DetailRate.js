@@ -24,11 +24,7 @@ const DetailRate = () => {
       <Row>
         <Col md={{ size: 8, offset: 2 }}>
           <h3>
-            Rates of "
-            <s>
-              <b>{symbol}</b>
-            </s>
-            "
+            Rates of "<b>{symbol}</b>"
           </h3>
           {rateTarget.length > 0 ? (
             rateTarget.map((item) => (

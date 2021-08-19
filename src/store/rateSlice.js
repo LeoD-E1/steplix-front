@@ -4,9 +4,9 @@ const rateSlice = createSlice({
   name: "rate",
   initialState: [],
   reducers: {
-    getRates: (state, action) => (state = [...action.payload]),
+    setRates: (state, action) => (state = [...action.payload]),
   },
 });
 
-export const { getRates } = rateSlice.actions;
+export const { setRates } = rateSlice.actions;
 export default rateSlice.reducer;

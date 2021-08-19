@@ -13,6 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import "./styles/rates.css";
 import ModalAddRate from "./ModalAddRate";
+import { Link } from "react-router-dom";
 
 const Currencies = () => {
   let rates = useSelector((state) => state.rate);
@@ -58,7 +59,9 @@ const Currencies = () => {
                         </CardSubtitle>
                       </Col>
                     </Row>
-                    <Button color="primary">View</Button>
+                    <Link to={`/rates/${item.symbol}/chart`}>
+                      <Button color="primary">View chart</Button>
+                    </Link>
                   </CardBody>
                 </Card>
               ))

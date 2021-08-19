@@ -1,34 +1,34 @@
 import React from "react";
 import { Line } from "@ant-design/charts";
 import { Container } from "reactstrap";
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 const Chart = () => {
-  const data = [
-    { date: "2021-08-18T19:32:09.000Z", value: 14 },
-    { date: "2021-08-18T19:32:50.000Z", value: 18 },
-    { date: "2021-08-18T19:33:09.000Z", value: 16 },
-    { date: "2021-08-18T19:33:59.000Z", value: 4 },
-    { date: "2021-08-18T19:34:09.000Z", value: 30 },
-    { date: "2021-08-18T19:34:59.000Z", value: 28 },
-    { date: "2021-08-18T19:35:09.000Z", value: 22 },
-    { date: "2021-08-18T19:35:59.000Z", value: 16 },
-    { date: "2021-08-18T19:36:19.000Z", value: 22 },
-    { date: "2021-08-18T19:37:09.000Z", value: 23 },
-  ];
+  const { symbol } = useParams();
+  const rates = useSelector((state) => state.rate);
+  const quotation = rates.filter((rate) => rate.symbol === symbol);
+
+  const data = quotation
+    .map((item) => ({
+      date: item.created_at,
+      value: item.value,
+    }))
+    .reverse();
 
   const config = {
     data,
     title: {
       visible: true,
-      text: "evolutionary chart of the price",
+      text: "Evolutionary chart of the price",
     },
     xField: "date",
     yField: "value",
     color: "#2593fc",
     point: {
       visible: true,
-      size: 5,
-      shape: "diamond",
+      size: 7,
+      shape: "circle",
       style: {
         fill: "white",
         stroke: "#2593fc",
@@ -39,9 +39,13 @@ const Chart = () => {
 
   return (
     <Container>
+      <h3>Evolutionary chart of the price of {symbol}</h3>
       <br />
-      <br />
-      <Line {...config} />
+      {data.length > 3 ? (
+        <Line {...config} />
+      ) : (
+        <h6>Data about {symbol} is not enough to show Chart</h6>
+      )}
     </Container>
   );
 };
