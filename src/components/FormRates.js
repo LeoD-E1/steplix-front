@@ -6,7 +6,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { setRates } from "../store/rateSlice";
 
 // Importing Styles
-import "./styles/styles.css";
+import "../styles/styles.css";
 
 // importing Querys
 import { postRate } from "../querys/postRate";

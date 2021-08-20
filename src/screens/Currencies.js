@@ -11,7 +11,7 @@ import {
   Button,
 } from "reactstrap";
 import { useSelector } from "react-redux";
-import "./styles/styles.css";
+import "../styles/styles.css";
 import { Link } from "react-router-dom";
 
 const Currencies = () => {

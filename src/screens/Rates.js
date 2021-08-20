@@ -11,8 +11,8 @@ import {
   Col,
 } from "reactstrap";
 import { useSelector } from "react-redux";
-import "./styles/styles.css";
-import ModalAddRate from "./ModalAddRate";
+import "../styles/styles.css";
+import ModalAddRate from "../components/ModalAddRate";
 import { Link } from "react-router-dom";
 
 const Currencies = () => {

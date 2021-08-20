@@ -5,15 +5,15 @@ import { useDispatch } from "react-redux";
 import { queryGetRates } from "./querys/getRates";
 import { queryGetCurrencies } from "./querys/getCurrencies";
 
-// importing Components
-import Currencies from "./components/Currencies";
-import Rates from "./components/Rates";
-import DetailRate from "./components/DetailRate";
+// importing Components and screens
+import Currencies from "./screens/Currencies";
+import Rates from "./screens/Rates";
+import DetailRate from "./screens/DetailRate";
 import NavigationBar from "./components/NavigationBar";
 import HomeScreen from "./screens/HomeScreen";
 import Chart from "./components/reciclable/Chart";
 
-import { getCurrencies } from "./store/currencySlice";
+import { setCurrencies } from "./store/currencySlice";
 import { setRates } from "./store/rateSlice";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -24,7 +24,8 @@ const App = () => {
   const fetchCurrencies = async () => {
     try {
       const data = await queryGetCurrencies();
-      data && dispatch(getCurrencies(data.currencies));
+      console.log(data);
+      data && dispatch(setCurrencies(data.currencies));
     } catch (error) {
       console.error(error);
     }

@@ -4,9 +4,9 @@ const currencySlice = createSlice({
   name: "currency",
   initialState: [],
   reducers: {
-    getCurrencies: (state, action) => (state = [...action.payload]),
+    setCurrencies: (state, action) => (state = [...action.payload]),
   },
 });
 
-export const { getCurrencies } = currencySlice.actions;
+export const { setCurrencies } = currencySlice.actions;
 export default currencySlice.reducer;

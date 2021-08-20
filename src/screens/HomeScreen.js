@@ -1,5 +1,5 @@
 import React from "react";
-import Currencies from "../components/Currencies";
+import Currencies from "./Currencies";
 
 const HomeScreen = () => {
   return <Currencies />;
